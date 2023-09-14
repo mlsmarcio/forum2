@@ -21,6 +21,9 @@ public class TokenService {
 	private String secret;
 
 	public String gerarToken(Authentication authentication) {
+		
+		System.out.println("TokenService.gerarToken");
+		
 		Usuario logado = (Usuario) authentication.getPrincipal();
 		Date hoje = new Date();
 		Date dataExpiracao = new Date(hoje.getTime() + Long.parseLong(expiration));
@@ -35,6 +38,7 @@ public class TokenService {
 	}
 	
 	public boolean isTokenValido(String token) {
+		System.out.println("TokenService.isTokenValido");
 		try {
 			Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
 			return true;

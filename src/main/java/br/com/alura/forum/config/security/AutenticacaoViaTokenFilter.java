@@ -28,6 +28,8 @@ public class AutenticacaoViaTokenFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		
+		System.out.println("AutenticacaoViaTokenFilter.doFilterInternal");
+		
 		String token = recuperarToken(request);
 		boolean valido = tokenService.isTokenValido(token);
 		if (valido) {
@@ -38,6 +40,9 @@ public class AutenticacaoViaTokenFilter extends OncePerRequestFilter {
 	}
 
 	private void autenticarCliente(String token) {
+		
+		System.out.println("AutenticacaoViaTokenFilter.autenticarCliente");
+		
 		Long idUsuario = tokenService.getIdUsuario(token);
 		Usuario usuario = repository.findById(idUsuario).get();
 		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
@@ -45,6 +50,9 @@ public class AutenticacaoViaTokenFilter extends OncePerRequestFilter {
 	}
 
 	private String recuperarToken(HttpServletRequest request) {
+		
+		System.out.println("AutenticacaoViaTokenFilter.recuperarToken");
+		
 		String token = request.getHeader("Authorization");
 		if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
 			return null;
