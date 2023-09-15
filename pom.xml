@@ -15,6 +15,9 @@
 	<name>forum</name>
 	<description>Demo project for Spring Boot</description>
 
+	<!-- PARA GERAR UM WAR EM VEZ DO JAR PADRÃO -->
+	<packaging>war</packaging>
+	
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
@@ -44,12 +47,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-
+		
+		<!-- MONITORAMENTO DA API REST -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-
+		
+		<!-- DOCUMENTAR API REST -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
@@ -96,6 +101,13 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 		</dependency>		
+		
+		<!-- ESPECIFICA PARA O MAVEN QUE A BIBLIOTECA DO TOMCAT SERÁ PROVIDA, NÃO INCLUÍ-LA NO BUILD DO PROJETO -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
